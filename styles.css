@@ -1,0 +1,14 @@
+canvas {
+    position: static;
+    border: 1px solid black;
+}
+
+#canvasSnowBackground {
+    background: rgb(80, 180, 255);
+    margin-left: 15%;
+}
+
+#canvasTreeBranches {
+    /* background: rgb(170, 80, 255); */
+    background: rgb(255, 80, 120);
+}
