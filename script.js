@@ -15,13 +15,17 @@ function main() {
     snowBgCanvas = initializeCanvas('canvasSnowBackground');
     branchCanvas = initializeCanvas('canvasTreeBranches');
 
-    // TODO: make a snowflake fractal on the other canvas
     const snowflakeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.5];
+    drawBranches(snowBgCanvas, snowflakeLocation, 80, 0, 15, 'white');
+    drawBranches(snowBgCanvas, snowflakeLocation, 80, 90, 15, 'white');
+    drawBranches(snowBgCanvas, snowflakeLocation, 80, 180, 15, 'white');
+    drawBranches(snowBgCanvas, snowflakeLocation, 80, 270, 15, 'white');
+
     const treeLocation = [CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.75];
-    drawBranches(branchCanvas, treeLocation, 100, 0, 25);
+    drawBranches(branchCanvas, treeLocation, 120, 0, 25, 'black');
 }
 
-function drawBranches(canvas, start, len, angle, branchWidth) {
+function drawBranches(canvas, start, len, angle, branchWidth, strokeColor) {
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
     // They do this so that the context's state
@@ -33,6 +37,7 @@ function drawBranches(canvas, start, len, angle, branchWidth) {
     // being persisted
     ctx.save();
     ctx.lineWidth = branchWidth;
+    ctx.strokeStyle = strokeColor;
     // change context's (x,y) position and then rotate
     ctx.translate(...start);
     ctx.rotate(angle * Math.PI/180);
@@ -42,7 +47,7 @@ function drawBranches(canvas, start, len, angle, branchWidth) {
     ctx.lineTo(0, -len);
     ctx.stroke();
 
-    if (len > 3) {
+    if (len > 5) {
         // start the new branches at tip of previous
         drawBranches(canvas, [0, -len], len * 0.7, 30, branchWidth * 0.7);
         drawBranches(canvas, [0, -len], len * 0.7, -60, branchWidth * 0.7);
